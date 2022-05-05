@@ -6,14 +6,31 @@ from DigitalGrasshopperGame import *
 
 from PyQt5 import QtSvg
 from PyQt5.QtGui import QMouseEvent, QPainter, QStandardItemModel
-from PyQt5.QtWidgets import QMainWindow, QItemDelegate, QStyleOptionViewItem, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QItemDelegate, QStyleOptionViewItem, QMessageBox, QPushButton, QAction
 from PyQt5.QtCore import QModelIndex, QRectF, Qt
 
 
 class MainWindow(QMainWindow, MainWindowUI):
+    curr_action = 1
+    def action(self):
+        print('cum')
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        menubar = self.menuBar()
+        self.setMenuBar(menubar)
+        file_menu = menubar.addMenu('Choose level')
+        one = QAction("1", self)
+        two = QAction("2", self)
+        three = QAction("3", self)
+        replay = QAction("Replay", self)
+        file_menu.addAction(replay)
+        file_menu.addAction(one)
+        file_menu.addAction(two)
+        file_menu.addAction(three)
+        # fileMenu.addAction(exitAction)
+        # b1.clicked.connect(replay)
 
         images_dir = os.path.join(os.path.dirname(__file__), 'images')
         self._images = {
@@ -22,6 +39,11 @@ class MainWindow(QMainWindow, MainWindowUI):
         }
 
         self._game = DigitalGrasshopperGame(4, 4)
+
+        one.triggered.connect(self._game.load_level_1)
+        two.triggered.connect(self._game.load_level_2)
+        three.triggered.connect(self._game.load_level_3)
+        replay.triggered.connect(self._game.replay_fc)
         # self._game = DigitalGrasshopperGame(6, 6)
         self.game_resize(self._game)
 

@@ -27,8 +27,21 @@ class Cell:
 
 
 class DigitalGrasshopperGame:
+    preset_1 = [[Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.ONE), Cell(CellState.THREE)],
+                [Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY)],
+                [Cell(CellState.EMPTY), Cell(CellState.TWO), Cell(CellState.ONE), Cell(CellState.EMPTY)],
+                [Cell(CellState.THREE), Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY)]]
+    preset_2 = [[Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.ONE), Cell(CellState.THREE)],
+                [Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY)],
+                [Cell(CellState.EMPTY), Cell(CellState.TWO), Cell(CellState.ONE), Cell(CellState.EMPTY)],
+                [Cell(CellState.THREE), Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY)]]
+    preset_3 = [[Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.ONE), Cell(CellState.THREE)],
+                [Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY)],
+                [Cell(CellState.EMPTY), Cell(CellState.TWO), Cell(CellState.ONE), Cell(CellState.EMPTY)],
+                [Cell(CellState.THREE), Cell(CellState.EMPTY), Cell(CellState.EMPTY), Cell(CellState.EMPTY)]]
 
     def __init__(self, row_count: int, col_count: int):
+        self._curr_lvl = 1
         self._row_count = row_count
         self._col_count = col_count
         self.new_game()
@@ -174,3 +187,25 @@ class DigitalGrasshopperGame:
                 cell_to._state = CellState.BLOCKED
             self.clear(self._field)
             self.is_win()
+
+    def load_level_1(self):
+        self._field = self.preset_1.copy()
+        self._curr_lvl = 1
+
+
+    def load_level_2(self):
+        self._field = self.preset_2.copy()
+        self._curr_lvl = 2
+
+    def load_level_3(self):
+        self._field = self.preset_3.copy()
+        self._curr_lvl = 3
+
+
+    def replay_fc(self):
+        if(self._curr_lvl == 1):
+            self._field = self.preset_1.copy()
+        if (self._curr_lvl == 2):
+            self._field = self.preset_2.copy()
+        if (self._curr_lvl == 3):
+            self._field = self.preset_3.copy()

@@ -51,6 +51,8 @@ class MainWindowUI(object):
         self.action_5.setObjectName("action_5")
 
 
+
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
